@@ -13,8 +13,9 @@ router.post('/create',userValidator.createUserValidator(createUserSchema) ,(req:
   
     try {
         const user = req.body 
-        userController.createUser(user)
-        res.status(200).send('postCreate')
+        const createdUser = userController.createUser(user)
+        console.log('route -->', createdUser)
+        res.status(200).send(createdUser)
 
     }catch(error : any) {
         console.log({error: error.message})

@@ -1,3 +1,5 @@
+import { ICreateUser } from "@src/useCases/user/createUser/interfaces/createUserInterface"
+import { CreateUserUseCase } from "../../useCases/user/createUser/createUserUseCase"
 
 class UserController  {
 
@@ -14,10 +16,18 @@ class UserController  {
     }
 
     public createUser(user: any /*tipar esse cara */) {
+        // validar se o usuário ja existe 
         //chamar o responsavel por criar o usuário
-        const userCreated = [{name: 'leonardo', lastName: 'valle'}]
+    
+        try{
+            const createdUser = new CreateUserUseCase().createUser(user)
+            return createdUser
 
-        return userCreated
+        }catch (error) {
+
+            console.log(error)
+            return false    
+        }
     }
 
     public updateUser(user: any, id: string /*tipar esse cara */) {
@@ -35,3 +45,5 @@ class UserController  {
 }
 
 export const userController = new UserController()
+
+
